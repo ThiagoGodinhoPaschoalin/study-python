@@ -1,0 +1,1 @@
+# https://www.geeksforgeeks.org/create-a-single-executable-from-a-python-project/

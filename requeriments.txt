@@ -1,0 +1,12 @@
+boto3
+qrcode
+img2pdf
+streamlit
+streamlit_modal
+streamlit_option_menu
+streamlit_navigation_bar
+lxml
+pyQt5
+opencv-python
+numpy
+matplotlib

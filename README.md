@@ -1,13 +1,43 @@
-# HELLO WORLD
+# Preparando seu ambiente
 
 Ambiente rodando de forma segura e encapsulada.
 
-## Ter o python globalmente
+## Instalação:
 
-Observação: A versão do python 3.13.0 está com um bug no `venv`, como descrito nessa discussão:<br>
-https://discuss.python.org/t/3-13-0-tkinter-versus-venv-in-windows-10/67151<br>
-E por esse movito sugiro a instalação da versão 3.12.7!
-* [download python 3.12.7](https://www.python.org/downloads/release/python-3127/)
+### Rodando tudo dentro de contêiner
+
+Isso para quando não quer ou não pode ter o python instalado na sua máquina.
+
+Instalações necessárias:
+- https://www.docker.com
+- https://code.visualstudio.com
+
+Extensões necessárias no seu [VSCode](https://vscode.dev/):
+- https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker
+- https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
+
+```bash
+docker pull python:3.13.1-slim
+docker rm study-python
+docker run --name study-python -it python:3.13.1-slim bash
+```
+
+Isso vai abrir no seu terminal uma central com o contêiner criado, já com python pronto para uso.
+
+o `Dev Containers` vai te permitir abrir a pasta de dentro do seu contêiner, a partir do VSCode, e com isso, pode programar diretamente de dentro do seu contêiner!
+
+
+### Rodando na sua máquina
+
+Se você quer mais comodidade, então instale o python no seu Sistema Operacional.
+
+Instalações necessárias:
+- https://code.visualstudio.com
+- https://www.python.org
+
+Extensões necessárias no seu [VSCode](https://vscode.dev/):
+- https://marketplace.visualstudio.com/items?itemName=ms-python.python
+
 
 ## Criação do ambiente virtual
 
@@ -17,14 +47,19 @@ https://docs.python.org/3/library/venv.html
 
 > Não se esquece de adicionar `**/.venv/*` no seu `.gitignore`
 
-```
-python.exe -m pip install --upgrade pip
-
-python -m venv .\.venv
-
-.\.venv\Scripts\activate
-
+```bash
 python -m pip install --upgrade pip
+python -m venv .\.venv
+.\.venv\Scripts\activate
+python -m pip install --upgrade pip
+```
+
+> A partir de agora, está com ambiente virtual criado e ativo!
+
+
+> Instalação das dependências necessárias até o momento:
+```
+pip install -r ./requeriments.txt
 
 pip install boto3
 pip install qrcode img2pdf
@@ -34,6 +69,25 @@ pip install opencv-python numpy matplotlib
 ```
 
 # Tutoriais:
+
+## Use Python no contêiner:
+
+Aqui é uma forma para quando não pode ou não quer instalar o python no seu host.
+
+```bash
+docker pull python:3.13.1-alpine
+docker run --name study-python:3.13.1 -it python:3.13.1-alpine bash
+
+docker pull python:3.13.1-slim
+docker rm study-python
+docker run --name study-python -it python:3.13.1-slim bash
+
+docker build -t study-python:get_youtube -f ./Dockerfile .
+docker run -p 8501:8501 --name get_youtube study-python:get_youtube
+```
+
+
+
 
 ## Streamlit:
 
