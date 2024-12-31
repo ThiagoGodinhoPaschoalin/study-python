@@ -54,6 +54,11 @@ python -m venv .\.venv
 python -m pip install --upgrade pip
 ```
 
+> Ativação Linux
+```bash
+source .venv\bin\activate
+```
+
 > A partir de agora, está com ambiente virtual criado e ativo!
 
 

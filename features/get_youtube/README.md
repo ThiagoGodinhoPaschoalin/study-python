@@ -32,6 +32,6 @@ mkdir -p executable/.venv_exe
 cd ./executable
 python -m venv .\.venv_exe
 .\.venv_exe\Scripts\Activate
-pip install streamlit pytubefix pyinstaller
-pyinstaller --onefile --noconsole ./../run_app.py
+pip install pytubefix tkhtmlview pyinstaller
+pyinstaller --onefile --noconsole ../app_tkinter.py
 ```

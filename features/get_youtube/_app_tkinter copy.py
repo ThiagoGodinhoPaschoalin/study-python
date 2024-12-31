@@ -2,21 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk  # Importando o módulo ttk para usar a combobox
 import webbrowser
-from pytubefix import YouTube, Stream
-from pytubefix.cli import on_progress
-
-def download_media(youtube_url, media_type="video"):
-    yt = YouTube(youtube_url, on_progress_callback=on_progress)
-    stream: Stream = None
-
-    if media_type == "video":
-        stream = yt.streams.get_highest_resolution()
-        stream = yt.streams.filter(res=stream.resolution, progressive=True).first()
-    elif media_type == "audio":
-        stream = yt.streams.filter(only_audio=True).first()
-
-    stream.download()
-
+from __service import download_media
 
 # Função para abrir a URL no navegador
 def abrir_url():

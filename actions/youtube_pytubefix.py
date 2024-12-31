@@ -5,23 +5,39 @@ from pytubefix.cli import on_progress
 # https://pytubefix.readthedocs.io/en/latest
 # pip install pytubefix
 
-url = "https://www.youtube.com/watch?v=X3kHQzD0vKk"
-url = "https://www.youtube.com/watch?v=-U88YhDBJ2Q"
+def download_media(youtube_url, media_type="video"):
+  # Size limit: 9.216 Kb
+  yt = YouTube(youtube_url, on_progress_callback=on_progress)
+  stream: Stream = None
+
+  if media_type == "video":
+    # Video resolution i.e. "1080p", "720p", "480p", "360p", "240p", "144p"
+    stream = yt.streams.get_highest_resolution()
+    stream = yt.streams.filter(res=stream.resolution, progressive=True).first()
+  elif media_type == "audio":
+    stream = yt.streams.filter(only_audio=True).first()
+
+  return stream.download()
+
+def converter_segundos(tempo_em_segundos): 
+  minutos, segundos = divmod(tempo_em_segundos, 60) 
+  return f"{minutos}:{segundos:02}"
+
+url = "https://www.youtube.com/watch?v=X3kHQzD0vKk" #(3:53) - O Rei Nasceu - Playback Legendado
+url = "https://www.youtube.com/watch?v=Cc-SuLtycAo" #(8:46) - Só Tu És Santo / Uma Coisa / Deixa Queimar/ Quando Ele Vem (Ao Vivo)
+url = "https://www.youtube.com/watch?v=ssdhJcW8gbQ" #(11:36) - Crie comandos de IA personalizados
+url = "https://www.youtube.com/watch?v=BYFyGqCurhY" #(6:48) - Bendito Serei (Ao Vivo) (9018KB)
 
 yt = YouTube(url, on_progress_callback=on_progress)
-print(yt.title, '\n', yt.author)
+print('title: ', yt.title)
+print('author: ', yt.author)
+print('Length: ', yt.length)
+print('Duration: ', converter_segundos(yt.length))
+print('get_highest_resolution: ', yt.streams.get_highest_resolution())
+print('get_audio_only: ', yt.streams.get_audio_only())#[abr]: average bitrate (audio streams only)
+#print('description: ', yt.description)
+for stream in yt.streams:
+  print('kb: ', stream.filesize_kb ,' .::. stream: ', stream)
 
-# audio or video
-choice = 'video'
-ys: Stream = None
-
-if choice == 'video':
-    stream = yt.streams.get_highest_resolution()
-    print('Melhor resolução: ', stream.resolution) # "360p", "480p", "720p", "1080p"
-    ys = yt.streams.filter(res=stream.resolution, progressive=True).first()
-elif choice == 'audio':
-    ys = yt.streams.filter(only_audio=True).first()
-else:
-    print('não escolhido')
-
-print(choice, "\n", ys.download())
+if 1 == 0:
+  print('download_media: ', download_media(url, "video") )
