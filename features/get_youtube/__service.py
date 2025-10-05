@@ -5,6 +5,7 @@ def converter_segundos(tempo_em_segundos):
   minutos, segundos = divmod(tempo_em_segundos, 60) 
   return f"{minutos}:{segundos:02}"
 
+# https://github.com/YunzheZJU/youtube-po-token-generator
 def download_media(youtube_url, media_type="video"):
   yt = YouTube(youtube_url)
   stream: Stream = None
