@@ -32,6 +32,7 @@ mkdir -p executable/.venv_exe
 cd ./executable
 python -m venv .\.venv_exe
 .\.venv_exe\Scripts\Activate
+python -m pip install --upgrade pip
 pip install pytubefix tkhtmlview pyinstaller
 pyinstaller --onefile --noconsole ../app_tkinter.py
 ```

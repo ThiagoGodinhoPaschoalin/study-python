@@ -28,6 +28,11 @@ url = "https://www.youtube.com/watch?v=Cc-SuLtycAo" #(8:46) - Só Tu És Santo /
 url = "https://www.youtube.com/watch?v=ssdhJcW8gbQ" #(11:36) - Crie comandos de IA personalizados
 url = "https://www.youtube.com/watch?v=BYFyGqCurhY" #(6:48) - Bendito Serei (Ao Vivo) (9018KB)
 
+print('download_media: ', download_media(url, "video") )
+
+
+
+'''
 yt = YouTube(url, on_progress_callback=on_progress)
 print('title: ', yt.title)
 print('author: ', yt.author)
@@ -38,6 +43,4 @@ print('get_audio_only: ', yt.streams.get_audio_only())#[abr]: average bitrate (a
 #print('description: ', yt.description)
 for stream in yt.streams:
   print('kb: ', stream.filesize_kb ,' .::. stream: ', stream)
-
-if 1 == 0:
-  print('download_media: ', download_media(url, "video") )
+'''
